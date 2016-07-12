@@ -40,21 +40,21 @@ func main() {
 }
 
 func runGraph(config *entitygraph.Config, db *sqlx.DB) {
-	query := "The Matrix"
-	cypher := `MATCH (movie:Movie) 
-				 WHERE movie.title =~ {0} 
-				 RETURN movie.title as title, movie.tagline as tagline, movie.released as released`
-	movies := []entitygraph.Movie{}
+	query := "BuzzFeed"
+	cypher := `MATCH (company:Company) 
+				 WHERE company.name =~ {0} 
+				 RETURN company.name as name`
+	companies := []entitygraph.Company{}
 	param := "(?i).*" + query + ".*"
-	err := db.Select(&movies, cypher, param)
+	err := db.Select(&companies, cypher, param)
 	if err != nil {
 		log.Println("error querying search:", err)
 	}
 
-	movieResults := []entitygraph.MovieResult{}
-	for _, x := range movies {
-		movieResults = append(movieResults, entitygraph.MovieResult{x})
+	companyResults := []entitygraph.CompanyResult{}
+	for _, x := range companies {
+		companyResults = append(companyResults, entitygraph.CompanyResult{x})
 	}
 
-	log.Println(movieResults)
+	log.Println(companyResults)
 }

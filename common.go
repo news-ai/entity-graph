@@ -17,15 +17,15 @@ const (
 	neo4jPassword = "e(U6V4mHzuRX[9P"
 )
 
-type MovieResult struct {
-	Movie `json:"movie"`
+type CompanyResult struct {
+	Company `json:"company"`
 }
 
-type Movie struct {
-	Released int      `json:"released"`
-	Title    string   `json:"title,omitempty"`
-	Tagline  string   `json:"tagline,omitempty"`
-	Cast     []Person `json:"cast,omitempty"`
+type Company struct {
+	Name         string    `json:"name"`
+	Competitors  []Company `json:"competitors,omitempty"`
+	Stakeholders []Person  `json:"stakeholders,omitempty"`
+	Keywords     []Keyword `json:"keywords,omitempty"`
 }
 
 type Person struct {
@@ -34,19 +34,8 @@ type Person struct {
 	Name string   `json:"name"`
 }
 
-type D3Response struct {
-	Nodes []Node `json:"nodes"`
-	Links []Link `json:"links"`
-}
-
-type Node struct {
-	Title string `json:"title"`
-	Label string `json:"label"`
-}
-
-type Link struct {
-	Source int `json:"source"`
-	Target int `json:"target"`
+type Keyword struct {
+	Name string `json:"name"`
 }
 
 type Config struct {
