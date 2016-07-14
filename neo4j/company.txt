@@ -1,0 +1,18 @@
+CREATE (TheMatrix:Movie {title:'The Matrix', released:1999, tagline:'Welcome to the Real World'})
+CREATE (Keanu:Person {name:'Keanu Reeves', born:1964})
+CREATE (Carrie:Person {name:'Carrie-Anne Moss', born:1967})
+CREATE (Laurence:Person {name:'Laurence Fishburne', born:1961})
+
+CREATE
+  (Keanu)-[:ACTED_IN {roles:['Neo']}]->(TheMatrix),
+  (Carrie)-[:ACTED_IN {roles:['Trinity']}]->(TheMatrix),
+  (Laurence)-[:ACTED_IN {roles:['Morpheus']}]->(TheMatrix),
+  (Hugo)-[:ACTED_IN {roles:['Agent Smith']}]->(TheMatrix),
+  (AndyW)-[:DIRECTED]->(TheMatrix),
+  (LanaW)-[:DIRECTED]->(TheMatrix),
+  (JoelS)-[:PRODUCED]->(TheMatrix)
+
+CREATE (YCombinator:Company {name:'Y Combinator', description:'Y Combinator provides seed funding for startups. Seed funding is the earliest stage of venture funding. It pays your expenses while you’re getting started.'})
+CREATE (TechStars:Company {title:'TechStars', description:'Techstars is the global ecosystem that helps entrepreneurs build great businesses.'})
+
+CREATE (TechStars)-[:COMPETES_WITH]->(YCombinator)

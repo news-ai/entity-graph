@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/news-ai/entitygraph"
+	"github.com/news-ai/entitygraph/graph"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/jprobinson/go-utils/utils"
 	_ "gopkg.in/cq.v1"
 	_ "gopkg.in/cq.v1/types"
@@ -36,25 +36,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	runGraph(config, sess)
-}
-
-func runGraph(config *entitygraph.Config, db *sqlx.DB) {
-	query := "BuzzFeed"
-	cypher := `MATCH (company:Company) 
-				 WHERE company.name =~ {0} 
-				 RETURN company.name as name`
-	companies := []entitygraph.Company{}
-	param := "(?i).*" + query + ".*"
-	err := db.Select(&companies, cypher, param)
-	if err != nil {
-		log.Println("error querying search:", err)
-	}
-
-	companyResults := []entitygraph.CompanyResult{}
-	for _, x := range companies {
-		companyResults = append(companyResults, entitygraph.CompanyResult{x})
-	}
-
+	company := "Y Combinator"
+	companyResults := graph.QueryGraph(config, sess, company)
 	log.Println(companyResults)
 }

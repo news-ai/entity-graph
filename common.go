@@ -23,6 +23,7 @@ type CompanyResult struct {
 
 type Company struct {
 	Name         string    `json:"name"`
+	Description  string    `json:"description,omitempty"`
 	Competitors  []Company `json:"competitors,omitempty"`
 	Stakeholders []Person  `json:"stakeholders,omitempty"`
 	Keywords     []Keyword `json:"keywords,omitempty"`
@@ -35,7 +36,8 @@ type Person struct {
 }
 
 type Keyword struct {
-	Name string `json:"name"`
+	Name   string `json:"name"`
+	Weight int    `json:"weight"`
 }
 
 type Config struct {
